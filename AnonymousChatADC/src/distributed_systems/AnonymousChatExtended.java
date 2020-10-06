@@ -53,7 +53,7 @@ public class AnonymousChatExtended implements AnonymousChat{
 			@Override
 			public Object reply(PeerAddress sender, Object request) throws Exception {
 				
-				return _bind.parseMessage(request);
+				return _bind.Message(request);
 			}
 		});
 	}
