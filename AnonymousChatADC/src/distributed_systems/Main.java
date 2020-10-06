@@ -61,7 +61,10 @@ public class Main {
 						terminal.getProperties().setPromptColor(Color.WHITE);
 						terminal.printf("\t %s room built! \n", room);
 					}else
-						terminal.executeWithPropertiesConfigurator(props -> ((TerminalProperties) props).setPromptColor("red"),t -> ((TextTerminal) t).println("\n\t*** WARNING ****\n\t This room already is present!! \n"));
+					{
+						terminal.getProperties().setPromptColor(Color.RED);
+						terminal.printf("\n\t*** WARNING ****\n\t This room already is present!! \n");
+					}
 					break;
 					
 					case 2:
@@ -72,7 +75,10 @@ public class Main {
 							terminal.getProperties().setPromptColor(Color.WHITE);
 							terminal.printf("\n Access ok into %s room\n", room);
 						}else 
-							terminal.executeWithPropertiesConfigurator(props -> ((TerminalProperties) props).setPromptColor("red"),t -> ((TextTerminal) t).println("\n\t*** WARNING ***\n The requested room can not be present or you are already joint it!! \n"));
+						{
+							terminal.getProperties().setPromptColor(Color.RED);
+							terminal.printf("\n\t*** WARNING ***\n The requested room can not be present or you are already joint it!! \n");
+						}
 						break;
 						
 					case 3:
