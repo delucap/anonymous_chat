@@ -1,6 +1,10 @@
 package distributed_systems;
 
 
+import java.awt.Color;
+import java.io.IOException;
+
+import org.beryx.textio.TerminalProperties;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import org.beryx.textio.TextTerminal;
@@ -41,12 +45,55 @@ public class Main {
 			while(true)
 			{
 				printMenu(terminal);
-				int choice = textIO.newIntInputReader().withMaxVal(9).withMinVal(0).read("Option");
+				int choice = textIO.newIntInputReader().withMinVal(0).withMaxVal(4).read("\n\t:::");
 				
 				if(choice == 0)
 				{
+					printf("\nExiting...");
 					System.exit(choice);
 				}
+				else 
+					switch(choice){
+					case 1:
+					room = textIO.newStringInputReader().withDefaultValue("input").read("Room name: ");
+					final String room_name = room;
+
+					if(peer.createRoom(room)) {
+						terminal.getProperties().setPromptColor(Color.WHITE);
+						terminal.printf("\t %s room built! \n", room);
+					}else
+						terminal.executeWithPropertiesConfigurator(props -> ((TerminalProperties) props).setPromptColor("red"),t -> ((TextTerminal) t).println("\n\t*** WARNING ****\n\t A rooom labeled"+room_name +"already is present!! \n"));
+					break;
+					
+					case 2:
+						terminal.printf("\nENTER ROOM NAME\n");
+						room = textIO.newStringInputReader().withDefaultValue("input").read("Room name: ");
+						final String room_name2 = room;
+						
+						if(peer.joinRoom(room)) {
+							terminal.getProperties().setPromptColor(Color.WHITE);
+							terminal.printf("\n Access ok into %s room\n", room);
+						}else 
+							terminal.executeWithPropertiesConfigurator(props -> ((TerminalProperties) props).setPromptColor("red"),t -> ((TextTerminal) t).println("\n\t*** WARNING ***\n The room "+room_name2+" can not be present or you are already joint it!! \n"));
+						break;
+						
+					case 3:
+						
+						break;
+						
+					case 4:
+						
+						break;
+						
+					case 5:
+						clearScreen();
+						break;
+						
+					default:
+						break;
+						
+					}
+				
 			}
 			
 			
@@ -57,18 +104,27 @@ public class Main {
 		
 	}
 	
-public static void printMenu(TextTerminal terminal) {
+public static void printMenu(TextTerminal t) throws IOException {
+
+		t.printf("\n\tSelect your choice:\n");
+		t.printf("\t1) Create a room\n");
+		t.printf("\t2) Join into a room\n");
+		t.printf("\t3) Send message\n");
+		t.printf("\t4) Leave room\n");
+		t.printf("\t5) Clear screen\n");
 		
-		terminal.printf("\n1 - CREATE CHAT ROOM\n");
-		terminal.printf("\n2 - CREATE SECRET CHAT ROOM\n");
-		terminal.printf("\n3 - JOIN TO CHAT ROOM\n");
-		terminal.printf("\n4 - JOIN TO SECRET CHAT ROOM\n");
-		terminal.printf("\n5 - EXIT FROM CHAT ROOM\n");
-		terminal.printf("\n6 - SEND MESSAGE ON ROOM\n");
-		terminal.printf("\n7 - VIEW LIST OF YUOURS CHATS\n");
-		terminal.printf("\n8 - SHOW BACKUP OF A CHAT ROOM\n");
-		terminal.printf("\n9 - SHOW HOW MANY PEERS ARE ACTIVE IN A ROOM\n");
+		t.printf("\t0) Exit");
 		
-		terminal.printf("\n0 - EXIT\n");
+		
 	}
+
+private static void printf(String str)
+			{
+				System.out.println(str);
+			}
+
+public static void clearScreen() {  
+    System.out.print("\033[H\033[2J");  
+    System.out.flush();  
+}  
 }
