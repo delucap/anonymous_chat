@@ -86,7 +86,17 @@ public class Main {
 						break;
 						
 					case 4:
-						
+						terminal.printf("\n\tInsert room name to leave:\n");
+						room = textIO.newStringInputReader().read("Room name: ");
+						if(peer.leaveRoom(room)) {
+							terminal.getProperties().setPromptColor(Color.WHITE);
+							terminal.printf("\n%s room left!\n", room);
+						}else 
+						{
+							terminal.getProperties().setPromptColor(Color.RED);
+							terminal.printf("\n\t*** WARNING ***\nYou are not present into %s room\n", room);
+
+						}
 						break;
 						
 					case 5:
