@@ -3,6 +3,8 @@ package distributed_systems;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.beryx.textio.TerminalProperties;
 import org.beryx.textio.TextIO;
@@ -82,9 +84,23 @@ public class Main {
 						break;
 						
 					case 3:
+						terminal.printf("\n\tInsert room name: ");
+						room = textIO.newStringInputReader().read("Room name: ");
+						terminal.printf("\n\tInsert text message to send: ");
+						String msg = textIO.newStringInputReader().read(":: ");
+						GregorianCalendar dt = new GregorianCalendar();
+						String dt_time = dt.get(Calendar.DAY_OF_MONTH) + "/" + dt.get(Calendar.MONTH)+1 + "/" + dt.get(Calendar.YEAR) + " " + dt.get(Calendar.HOUR_OF_DAY) + ":" + dt.get(Calendar.MINUTE);
 						
+						if(peer.sendMessage(room, dt_time + " to room [" + room + "]--> " + msg)) {
+							terminal.getProperties().setPromptColor(Color.WHITE);
+							terminal.printf("\n\tMessage sent to %s room\n", room);
+						}else
+						{
+							terminal.getProperties().setPromptColor(Color.RED);
+							terminal.printf("\n\t*** WARNING ***\nError during the send of message to %s room\n", room);
+						}
 						break;
-						
+												
 					case 4:
 						terminal.printf("\n\tInsert room name to leave:\n");
 						room = textIO.newStringInputReader().read("Room name: ");
