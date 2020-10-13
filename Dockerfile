@@ -4,7 +4,7 @@ RUN git clone https://github.com/delucap/anonymous_chat.git
 
 FROM maven:3.5-jdk-8-alpine
 WORKDIR /app
-COPY --from=0 /app/anonymous-chat/AnonymousChatADC /app
+COPY --from=0 /app/anonymous_chat/AnonymousChatADC /app
 RUN mvn package
 
 FROM openjdk:8-jre-alpine
