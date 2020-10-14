@@ -1,6 +1,6 @@
 # Distributed Systems course 2019/2020 - Anonymous Chat project
 
-Following project's aim is to esign and develop an anonymous chat API based on P2P Network. Each peer can send messages on a public chat room in an anonymous way. The system allows the users to create a new room, join in a room, leave a room, and send messages. As described in the [AnonymousChat Java API](https://github.com/spagnuolocarmine/distributedsystems/blob/master/challenges/AnonymousChat.java).
+Following project's aim is to design and develop an anonymous chat API based on P2P Network. Each peer can send messages on a public chat room in an anonymous way. The system allows the users to create a new room, join in a room, leave a room, and send messages. As described in the [AnonymousChat Java API](https://github.com/spagnuolocarmine/distributedsystems/blob/master/challenges/AnonymousChat.java).
 
 ### Basic operations
 Following the basic operations executable are described:
@@ -56,8 +56,8 @@ In order to start an intercative mode with a specific environment variables you 
 ```docker run -i --name MASTER_PEER -e MASTERIP="127.0.0.1" -e ID=0 anonymouschatADC```
 
 So:
-- (-i) is for interactive mode
-- (-e) is for setting environment variables
+- (-i) option is for interactive mode
+- (-e) option is for setting environment variables
 
 
 The MASTERIP environment variable is related to the master peer ip address typed into Java class. Therefore, the ID environment variable is the unique id of your peer. 
