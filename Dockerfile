@@ -1,10 +1,10 @@
 FROM alpine/git
 WORKDIR /app
-RUN git clone https://github.com/delucap/anonymous_chat.git
+RUN git clone https://github.com/delucap/pasquale_deluca_adc_20.git
 
 FROM maven:3.5-jdk-8-alpine
 WORKDIR /app
-COPY --from=0 /app/anonymous_chat/AnonymousChatADC /app
+COPY --from=0 /app/pasquale_deluca_adc_20/AnonymousChatADC /app
 RUN mvn package
 
 FROM openjdk:8-jre-alpine
